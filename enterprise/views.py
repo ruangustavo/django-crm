@@ -1,5 +1,9 @@
-from django.shortcuts import render
+from django.views import generic
+
+from .models import Product
 
 
-def index(request):
-    return render(request, "index.html")
+class HomeView(generic.ListView):
+    model = Product
+    template_name = "home.html"
+    context_object_name = "products_list"

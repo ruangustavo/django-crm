@@ -1,0 +1,17 @@
+{% extends 'base.html' %} 
+{% load static %}
+
+{% block title %} Início {% endblock title %}
+
+{% block content %}
+    {% for product in products_list %}
+        <div class="product">
+            <h2>
+                <a href="#">
+                    {{ product.name }}
+                </a>
+            </h2>
+            <p>Há {{ product.stock_quantity }} produto{{ product.stock_quantity|pluralize }} no estoque</p>
+        </div>
+    {% endfor %}    
+{% endblock %}
