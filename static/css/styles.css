@@ -51,8 +51,11 @@ a {
 }
 
 .row a {
-  justify-self: center;
-  text-decoration: underline;
+  border: 0.2rem solid #06b6d4;
+  border-radius: 0.4rem;
+  padding: 0.8rem 1.6rem;
+  display: block;
+  text-align: center;
 }
 
 /* || Header */
@@ -74,6 +77,10 @@ main {
 main > p {
   margin-bottom: 2.4rem;
   text-align: center;
+}
+
+main > h2 {
+  margin-bottom: 1.6rem;
 }
 
 .products {

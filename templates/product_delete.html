@@ -10,8 +10,8 @@
     {% csrf_token %}
     <p>Tem certeza que deseja deletar o produto "{{ product.name }}"?</p>
     <div class="row">
-      <button type="submit">Sim</button>
       <a href="{% url 'enterprise:home' %}">Cancelar</a>
+      <button type="submit">Sim</button>
     </div>
   </form>
 {% endblock %}
