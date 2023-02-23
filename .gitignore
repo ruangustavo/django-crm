@@ -175,3 +175,7 @@ cython_debug/
 
 # Migrations
 enterprise/migrations/*
+
+# Ignore static/images/products/* except "default_product.jpg"
+enterprise/static/images/products/*
+!enterprise/static/images/products/default_product.jpg

@@ -14,9 +14,6 @@
             </div>
         {% endfor %}
 
-        <div class="row">
-            <button type="submit">Salvar</button>
-            <a href="{% url 'enterprise:product_delete' product.id %}">Deletar</a>
-        </div>
+        <button type="submit">Salvar</button>
     </form>
 {% endblock %}
