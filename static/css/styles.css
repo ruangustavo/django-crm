@@ -127,6 +127,11 @@ input[type="file"] {
   color: #9ca3af;
 }
 
+input:focus,
+select:focus {
+  border: 0.2rem solid #06b6d4;
+}
+
 .form-group {
   display: flex;
   flex-direction: column;
