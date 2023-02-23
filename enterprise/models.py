@@ -13,11 +13,14 @@ class Product(models.Model):
         return self.name
 
     def delete(self, *args, **kwargs):
-        if self.stock_quantity - 1 <= 0:
-            super().delete(*args, **kwargs)
+        has_stock = self.stock_quantity > 0
 
-        self.stock_quantity -= 1
-        self.save()
+        if has_stock:
+            self.stock_quantity -= 1
+            self.save()
+            return None
+
+        super().delete(*args, **kwargs)
 
     # Sort by product quantity, descending
     class Meta:
