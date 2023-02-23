@@ -75,6 +75,7 @@ header {
 /* || Main */
 main {
   margin: auto;
+  min-width: 30rem;
   max-width: 60%;
   margin-top: 2.4rem;
 }
