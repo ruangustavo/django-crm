@@ -48,14 +48,18 @@ class StockView(CreateView):
     form_class = ProductForm
     success_url = reverse_lazy("enterprise:home")
 
+    def is_product_existing(self, form):
+        product = Product.objects.filter(name=form.cleaned_data["name"])
+        return product.first() is not None
+
     def form_valid(self, form):
-        product = Product.objects.filter(name=form.cleaned_data["name"]).first()
+        form_product = form.save(commit=False)
 
-        if product is None:
-            return super().form_valid(form)
+        if self.is_product_existing(form):
+            product = Product.objects.get(name=form.cleaned_data["name"])
+            product.stock_quantity += form_product.stock_quantity
+            product.save()
 
-        product.stock_quantity += form.cleaned_data["stock_quantity"]
-        product.save()
         return super().form_valid(form)
 
 
