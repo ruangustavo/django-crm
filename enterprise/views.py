@@ -1,7 +1,6 @@
-from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView
-from django.views.generic.edit import DeleteView, UpdateView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
 from .forms import ProductForm
 from .models import Product
@@ -25,3 +24,10 @@ class ProductDeleteView(DeleteView):
     template_name = "product_delete.html"
     success_url = reverse_lazy("enterprise:home")
     context_object_name = "product"
+
+
+class StockView(CreateView):
+    model = Product
+    template_name = "stock.html"
+    form_class = ProductForm
+    success_url = reverse_lazy("enterprise:home")
