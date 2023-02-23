@@ -145,3 +145,14 @@ input::file-selector-button {
   border-radius: 0.4rem;
   background-color: #475569;
 }
+
+/* || Responsivity */
+@media (max-width: 768px) {
+  main {
+    max-width: 80%;
+  }
+
+  header {
+    flex-direction: column;
+  }
+}
