@@ -189,9 +189,13 @@ input::file-selector-button {
 }
 
 /* || Responsivity */
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
+  .products {
+    grid-template-columns: 1fr;
+  }
+
   main {
-    max-width: 80%;
+    max-width: 70%;
   }
 
   header {
