@@ -1,9 +1,11 @@
 {% extends 'base.html' %} 
 {% load static %}
 
-{% block title %} Início {% endblock title %}
+{% block title %}Deletar produto{% endblock title %}
 
 {% block content %}
+  <h2>Delete produtos do estoque</h2>
+
   <form method="post">
     {% csrf_token %}
     <p>Tem certeza que deseja deletar o produto "{{ product.name }}"?</p>

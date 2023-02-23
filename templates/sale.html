@@ -1,9 +1,11 @@
 {% extends 'base.html' %} 
 {% load static %}
 
-{% block title %} Início {% endblock title %}
+{% block title %}Realizar vendas{% endblock title %}
 
 {% block content %}
+  <h2>Realize uma venda</h2>
+
   <form method="post">
     {% csrf_token %}
     

@@ -1,9 +1,11 @@
 {% extends 'base.html' %} 
 {% load static %}
 
-{% block title %} Início {% endblock title %}
+{% block title %}Atualizar produto{% endblock title %}
 
 {% block content %}
+  <h2>Atualize produtos do estoque</h2>
+
   <form method="post">
     {% csrf_token %}
     
