@@ -4,19 +4,19 @@
 {% block title %} Início {% endblock title %}
 
 {% block content %}
-    <form method="post">
-        {% csrf_token %}
-        
-        {% for field in form %}
-            <div class="form-group">
-                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                {{ field }}
-            </div>
-        {% endfor %}
+  <form method="post">
+    {% csrf_token %}
+    
+    {% for field in form %}
+      <div class="form-group">
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {{ field }}
+      </div>
+    {% endfor %}
 
-        <div class="row">
-            <button type="submit">Salvar</button>
-            <a href="{% url 'enterprise:product_delete' product.id %}">Deletar</a>
-        </div>
-    </form>
+    <div class="row">
+      <button type="submit">Salvar</button>
+      <a href="{% url 'enterprise:product_delete' product.id %}">Deletar</a>
+    </div>
+  </form>
 {% endblock %}

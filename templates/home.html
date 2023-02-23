@@ -4,26 +4,26 @@
 {% block title %} Início {% endblock title %}
 
 {% block content %}
-    <p>Atualmente, o faturamento da empresa é de <span class="highlight">{{ sales_invoice }}</span></p>
+  <p>Atualmente, o faturamento da empresa é de <span class="highlight">{{ sales_invoice }}</span></p>
 
-    <section class="products">
-        {% for product in products_list %}
-            <div class="product">
-                {% if product.image %}
-                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
-                {% else %}
-                    <img src="{% static 'images/products/default_product.jpg' %}" alt="{{ product.name }}">
-                {% endif %}            
+  <section class="products">
+    {% for product in products_list %}
+      <div class="product">
+        {% if product.image %}
+          <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        {% else %}
+          <img src="{% static 'images/products/default_product.jpg' %}" alt="{{ product.name }}">
+        {% endif %}      
 
-                <div class="product-info">
-                    <h2>
-                        <a href="{% url 'enterprise:product_update' product.id %}">
-                            {{ product.name }}
-                        </a>
-                    </h2>
-                    <p>Há {{ product.stock_quantity }} produto{{ product.stock_quantity|pluralize }} no estoque</p>
-                </div>
-            </div>
-        {% endfor %}    
-    </section>
+        <div class="product-info">
+          <h2>
+            <a href="{% url 'enterprise:product_update' product.id %}">
+              {{ product.name }}
+            </a>
+          </h2>
+          <p>Há {{ product.stock_quantity }} produto{{ product.stock_quantity|pluralize }} no estoque</p>
+        </div>
+      </div>
+    {% endfor %}  
+  </section>
 {% endblock %}
