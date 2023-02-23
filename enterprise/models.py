@@ -7,13 +7,13 @@ class Product(models.Model):
     image = models.ImageField(upload_to="static/images/products", blank=True, null=True)
     name = models.CharField(max_length=100, unique=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    stock_quantity = models.IntegerField()
+    stock_quantity = models.PositiveIntegerField()
 
     def __str__(self):
         return self.name
 
     def delete(self, *args, **kwargs):
-        if self.stock_quantity == 0:
+        if self.stock_quantity - 1 <= 0:
             super().delete(*args, **kwargs)
 
         self.stock_quantity -= 1
