@@ -12,6 +12,13 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+    def delete(self, *args, **kwargs):
+        if self.stock_quantity == 0:
+            super().delete(*args, **kwargs)
+
+        self.stock_quantity -= 1
+        self.save()
+
 
 class Sale(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
