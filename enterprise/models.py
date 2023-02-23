@@ -21,7 +21,7 @@ class Product(models.Model):
 
 
 class Sale(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, default=1)
     quantity = models.IntegerField()
     # This field is not required because it will be calculated, not filled by the user
     total_price = models.DecimalField(

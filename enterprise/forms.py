@@ -18,13 +18,10 @@ class ProductForm(forms.ModelForm):
                 attrs={"placeholder": "Digite o nome do produto..."}
             ),
             "price": forms.NumberInput(
-                attrs={"placeholder": "Digite o preço do produto...", type: "number"}
+                attrs={"placeholder": "Digite o preço do produto..."}
             ),
             "stock_quantity": forms.NumberInput(
-                attrs={
-                    "placeholder": "Digite a quantidade em estoque...",
-                    type: "number",
-                }
+                attrs={"placeholder": "Digite a quantidade em estoque..."}
             ),
         }
 
@@ -38,7 +35,7 @@ class SaleForm(forms.ModelForm):
             "quantity": "Quantidade",
         }
         widgets = {
-            "product": forms.Select(attrs={"placeholder": "Selecione o produto..."}),
+            "product": forms.Select(attrs={"placeholder": "Selecione um produto..."}),
             "quantity": forms.NumberInput(
                 attrs={
                     "placeholder": "Digite a quantidade que será vendida...",
