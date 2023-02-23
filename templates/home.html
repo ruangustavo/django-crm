@@ -9,6 +9,12 @@
     {% for product in products_list %}
         <div class="product">
             <h2>
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                {% else %}
+                    <img src="{% static 'images/products/default_product.jpg' %}" alt="{{ product.name }}">
+                {% endif %}
+
                 <a href="{% url 'enterprise:product_update' product.id %}">
                     {{ product.name }}
                 </a>
