@@ -13,7 +13,7 @@ class Product(models.Model):
         return self.name
 
     def delete(self, *args, **kwargs):
-        has_stock = self.stock_quantity > 0
+        has_stock = (self.stock_quantity - 1) > 0
 
         if has_stock:
             self.stock_quantity -= 1
