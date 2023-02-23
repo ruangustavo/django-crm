@@ -5,7 +5,7 @@ class Product(models.Model):
     # Blank = True means that the field is not required
     # Null = True means that the field can be empty in the database
     image = models.ImageField(upload_to="static/images/products", blank=True, null=True)
-    name = models.CharField(max_length=100, unique=True)
+    name = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     stock_quantity = models.PositiveIntegerField()
 
@@ -38,3 +38,7 @@ class Sale(models.Model):
 
     def __str__(self):
         return str(self.id)
+
+    def save(self, *args, **kwargs):
+        self.total_price = self.product.price * self.quantity
+        super().save(*args, **kwargs)
