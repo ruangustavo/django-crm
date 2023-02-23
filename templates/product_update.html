@@ -1,0 +1,20 @@
+{% extends 'base.html' %} 
+{% load static %}
+
+{% block title %} Início {% endblock title %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        
+        {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+            </div>
+        {% endfor %}
+
+        <button type="submit">Salvar</button>
+        <a href="{% url 'enterprise:product_delete' product.id %}">Deletar</a>
+    </form>
+{% endblock %}

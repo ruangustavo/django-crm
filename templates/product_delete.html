@@ -1,0 +1,13 @@
+{% extends 'base.html' %} 
+{% load static %}
+
+{% block title %} Início {% endblock title %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        <p>Tem certeza que deseja deletar o produto "{{ product.name }}"?</p>
+        <button type="submit">Confirmar</button>
+        <a href="{% url 'enterprise:home' %}">Cancelar</a>
+    </form>
+{% endblock %}
