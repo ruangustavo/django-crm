@@ -1,4 +1,5 @@
 from django.db.models import Sum
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
@@ -16,10 +17,6 @@ class HomeView(ListView):
     def get_enterprise_invoce(self):
         sales_invoice_obj = Sale.objects.aggregate(Sum("total_price"))
         sales_invoice = sales_invoice_obj["total_price__sum"]
-
-        if sales_invoice is None:
-            sales_invoice = 0
-
         return format_currency(sales_invoice)
 
     def get_context_data(self, **kwargs):
@@ -49,16 +46,27 @@ class StockView(CreateView):
     success_url = reverse_lazy("enterprise:home")
 
     def is_product_existing(self, form):
-        product = Product.objects.filter(name=form.cleaned_data["name"])
-        return product.first() is not None
+        product = Product.objects.filter(
+            name=form["name"],
+            price=form["price"],
+        )
+
+        return product.exists()
+
+    def update_product_stock(self, form):
+        product = Product.objects.get(
+            name=form["name"],
+            price=form["price"],
+        )
+
+        new_stock_quantity = int(form["stock_quantity"])
+        product.stock_quantity += new_stock_quantity
+        product.save()
 
     def form_valid(self, form):
-        form_product = form.save(commit=False)
-
-        if self.is_product_existing(form):
-            product = Product.objects.get(name=form.cleaned_data["name"])
-            product.stock_quantity += form_product.stock_quantity
-            product.save()
+        if self.is_product_existing(self.request.POST):
+            self.update_product_stock(self.request.POST)
+            return redirect(self.success_url)
 
         return super().form_valid(form)
 
@@ -71,13 +79,14 @@ class SaleView(CreateView):
 
     def form_valid(self, form):
         sale = form.save(commit=False)
-        sale.total_price = sale.product.price * sale.quantity
-        sale.save()
         product = sale.product
 
         if sale.quantity > product.stock_quantity:
             return self.form_invalid(form)
 
+        self.update_product_stock_quantity(sale, product)
+        return super().form_valid(form)
+
+    def update_product_stock_quantity(self, sale, product):
         product.stock_quantity -= sale.quantity
         product.save()
-        return super().form_valid(form)
