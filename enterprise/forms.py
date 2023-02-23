@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Product
+from .models import Product, Sale
 
 
 class ProductForm(forms.ModelForm):
@@ -23,6 +23,25 @@ class ProductForm(forms.ModelForm):
             "stock_quantity": forms.NumberInput(
                 attrs={
                     "placeholder": "Digite a quantidade em estoque...",
+                    type: "number",
+                }
+            ),
+        }
+
+
+class SaleForm(forms.ModelForm):
+    class Meta:
+        model = Sale
+        fields = ("product", "quantity")
+        labels = {
+            "product": "Produto",
+            "quantity": "Quantidade",
+        }
+        widgets = {
+            "product": forms.Select(attrs={"placeholder": "Selecione o produto..."}),
+            "quantity": forms.NumberInput(
+                attrs={
+                    "placeholder": "Digite a quantidade que será vendida...",
                     type: "number",
                 }
             ),

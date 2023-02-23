@@ -4,6 +4,8 @@
 {% block title %} Início {% endblock title %}
 
 {% block content %}
+    <p>Atualmente, o faturamento da empresa é de <span>{{ sales_invoice }}</span></p>
+
     {% for product in products_list %}
         <div class="product">
             <h2>
