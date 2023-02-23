@@ -19,6 +19,10 @@ class Product(models.Model):
         self.stock_quantity -= 1
         self.save()
 
+    # Sort by product quantity, descending
+    class Meta:
+        ordering = ["-stock_quantity"]
+
 
 class Sale(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, default=1)
